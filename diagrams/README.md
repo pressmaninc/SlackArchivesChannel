@@ -1,5 +1,5 @@
-#構成図
-##前提
+# 構成図
+## 前提
 [Diagrams](https://diagrams.mingrammer.com/)が使用可能であること。
 
 ## 構成図生成
