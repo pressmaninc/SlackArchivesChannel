@@ -1,0 +1,150 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`stack 1`] = `
+Object {
+  "Parameters": Object {
+    "AssetParameters69c8a15d1328a084254aafbfa6db5ed51c7ea12753167169bcca78571b7a3c84ArtifactHash274310B6": Object {
+      "Description": "Artifact hash for asset \\"69c8a15d1328a084254aafbfa6db5ed51c7ea12753167169bcca78571b7a3c84\\"",
+      "Type": "String",
+    },
+    "AssetParameters69c8a15d1328a084254aafbfa6db5ed51c7ea12753167169bcca78571b7a3c84S3Bucket7D2DCE82": Object {
+      "Description": "S3 bucket for asset \\"69c8a15d1328a084254aafbfa6db5ed51c7ea12753167169bcca78571b7a3c84\\"",
+      "Type": "String",
+    },
+    "AssetParameters69c8a15d1328a084254aafbfa6db5ed51c7ea12753167169bcca78571b7a3c84S3VersionKeyCD49B408": Object {
+      "Description": "S3 key for asset version \\"69c8a15d1328a084254aafbfa6db5ed51c7ea12753167169bcca78571b7a3c84\\"",
+      "Type": "String",
+    },
+  },
+  "Resources": Object {
+    "SlackArchivesChannelScheduleEventBED625EC": Object {
+      "Properties": Object {
+        "ScheduleExpression": "cron(0 0 ? * MON *)",
+        "State": "ENABLED",
+        "Targets": Array [
+          Object {
+            "Arn": Object {
+              "Fn::GetAtt": Array [
+                "slackarchiveschannelE466D073",
+                "Arn",
+              ],
+            },
+            "Id": "Target0",
+          },
+        ],
+      },
+      "Type": "AWS::Events::Rule",
+    },
+    "slackarchiveschannelAllowEventRuleStackSlackArchivesChannelScheduleEventA48772690C45EB34": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "slackarchiveschannelE466D073",
+            "Arn",
+          ],
+        },
+        "Principal": "events.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::GetAtt": Array [
+            "SlackArchivesChannelScheduleEventBED625EC",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "slackarchiveschannelE466D073": Object {
+      "DependsOn": Array [
+        "slackarchiveschannelServiceRole725E0307",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParameters69c8a15d1328a084254aafbfa6db5ed51c7ea12753167169bcca78571b7a3c84S3Bucket7D2DCE82",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters69c8a15d1328a084254aafbfa6db5ed51c7ea12753167169bcca78571b7a3c84S3VersionKeyCD49B408",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters69c8a15d1328a084254aafbfa6db5ed51c7ea12753167169bcca78571b7a3c84S3VersionKeyCD49B408",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Environment": Object {
+          "Variables": Object {
+            "SLACK_API_TOKEN": "xoxp",
+          },
+        },
+        "Handler": "lambda_function.lambda_handler",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "slackarchiveschannelServiceRole725E0307",
+            "Arn",
+          ],
+        },
+        "Runtime": "python3.8",
+        "Timeout": 60,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "slackarchiveschannelServiceRole725E0307": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+  },
+}
+`;

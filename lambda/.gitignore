@@ -1,0 +1,10 @@
+aiohttp*
+async*
+attr*
+bin
+chardet*
+idna*
+multidict*
+slack*
+yarl*
+deploy_package.zip
