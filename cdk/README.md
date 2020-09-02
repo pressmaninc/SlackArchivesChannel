@@ -21,7 +21,7 @@ AWS CDKを使用してデプロイを行うため
 
 ### AWSにデプロイを行う
 `cdk deploy` でAWSにデプロイを行う。<br>
-この時、[lambdaディレクトリ内](`./../lambda`)に`deploy_package.zip`が生成済みであること。
+この時、[lambdaディレクトリ内](`../lambda`)に`deploy_package.zip`が生成済みであること。
 
 ### 削除をする場合
 `cdk destroy`でデプロイにより作成されたAWS上のリソースを削除する。
