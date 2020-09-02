@@ -1,14 +1,27 @@
-# Welcome to your CDK TypeScript project!
+# Slack Archives Channel CDK
+## 概要
+[lambdaディレクトリ](../lambda)で作成したデプロイパッケージを元にlambda関数を作成し、AWS上で定期実行される仕組みをデプロイする。
 
-This is a blank project for TypeScript development with CDK.
+定期実行は毎週月曜日AM9:00(日本時刻)で実行される。
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+## 前提
+AWS CDKを使用してデプロイを行うため
+* AWS cliが使用可能
+* AWS cdkが利用可能な状態
+* `cdk bootstrap`が完了している
 
-## Useful commands
+## デプロイ方法
+### cdk.jsonを作成
+`cp cdk.sample.json cdk.json`を実行し、ファイルを作成する。
 
- * `npm run build`   compile typescript to js
- * `npm run watch`   watch for changes and compile
- * `npm run test`    perform the jest unit tests
- * `cdk deploy`      deploy this stack to your default AWS account/region
- * `cdk diff`        compare deployed stack with current state
- * `cdk synth`       emits the synthesized CloudFormation template
+ファイル内の`SLACK_API_TOKEN`にSlackから取得したAPI TOKENを設定する
+
+### TypeScriptをビルドする
+`npm run build` or `npm run watch`でTypeScriptをビルドする。
+
+### AWSにデプロイを行う
+`cdk deploy` でAWSにデプロイを行う。<br>
+この時、[lambdaディレクトリ内](`./../lambda`)に`deploy_package.zip`が生成済みであること。
+
+### 削除をする場合
+`cdk destroy`でデプロイにより作成されたAWS上のリソースを削除する。
