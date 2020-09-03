@@ -17,6 +17,7 @@ AWS CDKを使用してデプロイを行うため
 ファイル内の`SLACK_API_TOKEN`にSlackから取得したAPI TOKENを設定する
 
 ### TypeScriptをビルドする
+`npm install`で必要なパッケージをインストールする。<br>
 `npm run build` or `npm run watch`でTypeScriptをビルドする。
 
 ### AWSにデプロイを行う
